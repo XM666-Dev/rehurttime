@@ -43,7 +43,7 @@ public class ExpressionHandler {
 
     public static String getHolderType(Holder<?> holder) {
         if (holder != null) {
-            var key = holder.getKey();
+            var key = holder.unwrapKey().get();
             if (key != null) {
                 return key.location().toString();
             }
