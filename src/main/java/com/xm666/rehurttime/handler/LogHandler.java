@@ -2,23 +2,28 @@ package com.xm666.rehurttime.handler;
 
 import com.xm666.rehurttime.Config;
 import com.xm666.rehurttime.ReHurtTime;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.fml.common.Mod;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
 
 public class LogHandler {
-    private static class LogHandlerClient {
+    private static class LogHandlerCommon {
         @SubscribeEvent
-        static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
+        static void onLivingIncomingDamage(LivingAttackEvent event) {
             var result = ExpressionHandler.execute(Config.LOG_FUNCTION.get(), event.getEntity(), event.getSource());
             ReHurtTime.LOGGER.info(result.toString());
         }
     }
 
-    @EventBusSubscriber
-    private static class LogHandlerConfig {
+    @Mod(value = ReHurtTime.MODID)
+    public static class LogHandlerConfig {
+        public LogHandlerConfig(IEventBus modEventBus) {
+            modEventBus.register(LogHandlerConfig.class);
+        }
+
         @SubscribeEvent
         static void onConfigLoading(ModConfigEvent.Loading event) {
             toggle();
@@ -31,9 +36,9 @@ public class LogHandler {
 
         static void toggle() {
             if (Config.LOG_ENABLED.get()) {
-                NeoForge.EVENT_BUS.register(LogHandlerClient.class);
+                NeoForge.EVENT_BUS.register(LogHandlerCommon.class);
             } else {
-                NeoForge.EVENT_BUS.unregister(LogHandlerClient.class);
+                NeoForge.EVENT_BUS.unregister(LogHandlerCommon.class);
             }
         }
     }
