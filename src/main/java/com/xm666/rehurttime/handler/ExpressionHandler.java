@@ -1,4 +1,4 @@
-package com.xm666.rehurttime.util;
+package com.xm666.rehurttime.handler;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -12,7 +12,7 @@ import net.minecraft.world.item.ItemStack;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class Util {
+public class ExpressionHandler {
     public static String getEntityType(Entity entity) {
         if (entity != null) {
             return BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
@@ -73,7 +73,7 @@ public class Util {
     }
 
     public static Object execute(String expression, LivingEntity entity, DamageSource source) {
-        return PredicateUtil.execute(expression, "entity", entity, "source", source);
+        return EvaluatorHandler.execute(expression, "entity", entity, "source", source);
     }
 
     public static boolean test(String expression, LivingEntity entity, DamageSource source) {

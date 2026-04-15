@@ -1,15 +1,11 @@
-package com.xm666.rehurttime.util;
+package com.xm666.rehurttime.handler;
 
 import com.googlecode.aviator.AviatorEvaluator;
 import com.googlecode.aviator.runtime.JavaMethodReflectionFunctionMissing;
 import com.googlecode.aviator.runtime.function.ClassMethodFunction;
 import com.googlecode.aviator.utils.Reflector;
 
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Map;
-
-public class PredicateUtil {
+public class EvaluatorHandler {
     static {
         AviatorEvaluator.setFunctionMissing(JavaMethodReflectionFunctionMissing.getInstance());
         try {
@@ -22,13 +18,13 @@ public class PredicateUtil {
     private static void addMethodFunctions() throws IllegalAccessException, NoSuchMethodException {
         var instance = AviatorEvaluator.getInstance();
 
-        Map<String, List<Method>> methodMap = Reflector.findMethodsFromClass(Util.class, true);
+        var methodMap = Reflector.findMethodsFromClass(ExpressionHandler.class, true);
 
-        for (Map.Entry<String, List<Method>> entry : methodMap.entrySet()) {
-            String methodName = entry.getKey();
-            List<Method> methods = entry.getValue();
+        for (var entry : methodMap.entrySet()) {
+            var methodName = entry.getKey();
+            var methods = entry.getValue();
             methods.add(null);
-            instance.addFunction(new ClassMethodFunction((Class<?>) Util.class, true, methodName, methodName, methods));
+            instance.addFunction(new ClassMethodFunction((Class<?>) ExpressionHandler.class, true, methodName, methodName, methods));
             methods.removeLast();
         }
     }
