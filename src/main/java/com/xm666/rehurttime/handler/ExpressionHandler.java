@@ -2,7 +2,7 @@ package com.xm666.rehurttime.handler;
 
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.resources.Identifier;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
@@ -36,7 +36,7 @@ public class ExpressionHandler {
 
     public static Set<String> getItemTags(ItemStack stack) {
         if (stack != null) {
-            return stack.getTags().map(TagKey::location).map(ResourceLocation::toString).collect(Collectors.toSet());
+            return stack.getTags().map(TagKey::location).map(Identifier::toString).collect(Collectors.toSet());
         }
         return Set.of();
     }
@@ -45,7 +45,7 @@ public class ExpressionHandler {
         if (holder != null) {
             var key = holder.getKey();
             if (key != null) {
-                return key.location().toString();
+                return key.identifier().toString();
             }
         }
         return "";
@@ -53,7 +53,7 @@ public class ExpressionHandler {
 
     public static Set<String> getHolderTags(Holder<?> holder) {
         if (holder != null) {
-            return holder.tags().map(TagKey::location).map(ResourceLocation::toString).collect(Collectors.toSet());
+            return holder.tags().map(TagKey::location).map(Identifier::toString).collect(Collectors.toSet());
         }
         return Set.of();
     }
