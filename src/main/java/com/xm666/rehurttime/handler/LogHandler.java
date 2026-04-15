@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 public class LogHandler {
-    private static class LogHandlerClient {
+    private static class LogHandlerCommon {
         @SubscribeEvent
         static void onLivingIncomingDamage(LivingIncomingDamageEvent event) {
             var result = ExpressionHandler.execute(Config.LOG_FUNCTION.get(), event.getEntity(), event.getSource());
@@ -31,9 +31,9 @@ public class LogHandler {
 
         static void toggle() {
             if (Config.LOG_ENABLED.get()) {
-                NeoForge.EVENT_BUS.register(LogHandlerClient.class);
+                NeoForge.EVENT_BUS.register(LogHandlerCommon.class);
             } else {
-                NeoForge.EVENT_BUS.unregister(LogHandlerClient.class);
+                NeoForge.EVENT_BUS.unregister(LogHandlerCommon.class);
             }
         }
     }
