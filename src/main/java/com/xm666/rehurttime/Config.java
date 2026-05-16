@@ -1,12 +1,11 @@
 package com.xm666.rehurttime;
 
 import net.neoforged.neoforge.common.ModConfigSpec;
-import org.jetbrains.annotations.NotNull;
 
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
-    public static final ModConfigSpec.ConfigValue<@NotNull String> BYPASSES_INVULNERABILITY_PREDICATE = BUILDER
+    public static final ModConfigSpec.ConfigValue<String> BYPASSES_INVULNERABILITY_PREDICATE = BUILDER
             .comment("""
                     Available variables:
                     LivingEntity entity
@@ -24,13 +23,13 @@ public class Config {
                     ItemStack getWeaponItem(DamageSource source)""")
             .define("bypassesInvulnerabilityPredicate", "getEntityType(entity) != 'minecraft:player' && !include(getSourceTags(source), 'neoforge:is_environment') && getSourceType(source) != 'minecraft:campfire'");
 
-    public static final ModConfigSpec.ConfigValue<@NotNull String> APPLIES_KNOCKBACK_PREDICATE = BUILDER
+    public static final ModConfigSpec.ConfigValue<String> APPLIES_KNOCKBACK_PREDICATE = BUILDER
             .define("appliesKnockbackPredicate", "include(getSourceTags(getLastDamageSource(entity)), 'minecraft:no_knockback')");
 
     public static final ModConfigSpec.BooleanValue LOG_ENABLED = BUILDER
             .define("logEnabled", false);
 
-    public static final ModConfigSpec.ConfigValue<@NotNull String> LOG_FUNCTION = BUILDER
+    public static final ModConfigSpec.ConfigValue<String> LOG_FUNCTION = BUILDER
             .define("logFunction", "seq.map('entityType', getEntityType(entity), 'sourceEntityType', getEntityType(getEntity(source)), 'sourceType', getSourceType(source))");
 
     static final ModConfigSpec SPEC = BUILDER.build();
