@@ -17,9 +17,7 @@ public class EvaluatorHandler {
 
     private static void addMethodFunctions() throws IllegalAccessException, NoSuchMethodException {
         var instance = AviatorEvaluator.getInstance();
-
         var methodMap = Reflector.findMethodsFromClass(ExpressionHandler.class, true);
-
         for (var entry : methodMap.entrySet()) {
             var methodName = entry.getKey();
             var methods = entry.getValue();
