@@ -41,7 +41,6 @@ public class ExpressionHandler {
         return Set.of();
     }
 
-    @SuppressWarnings({"OptionalGetWithoutIsPresent", "ConstantValue"})
     public static String getHolderType(Holder<?> holder) {
         if (holder != null) {
             var key = holder.unwrapKey().get();
