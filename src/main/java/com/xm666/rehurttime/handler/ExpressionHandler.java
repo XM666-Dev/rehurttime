@@ -14,62 +14,55 @@ import java.util.stream.Collectors;
 
 public class ExpressionHandler {
     public static String getEntityType(Entity entity) {
-        if (entity != null) {
-            return BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
-        }
-        return "";
+        if (entity == null) return "";
+
+        return BuiltInRegistries.ENTITY_TYPE.getKey(entity.getType()).toString();
+
     }
 
     public static Set<String> getEntityTags(Entity entity) {
-        if (entity != null) {
-            return entity.getTags();
-        }
-        return Set.of();
+        if (entity == null) return Set.of();
+
+        return entity.getTags();
     }
 
     public static String getItemType(ItemStack stack) {
-        if (stack != null) {
-            return BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
-        }
-        return "";
+        if (stack == null) return "";
+
+        return BuiltInRegistries.ITEM.getKey(stack.getItem()).toString();
     }
 
     public static Set<String> getItemTags(ItemStack stack) {
-        if (stack != null) {
-            return stack.getTags().map(TagKey::location).map(ResourceLocation::toString).collect(Collectors.toSet());
-        }
-        return Set.of();
+        if (stack == null) return Set.of();
+
+        return stack.getTags().map(TagKey::location).map(ResourceLocation::toString).collect(Collectors.toSet());
     }
 
     public static String getHolderType(Holder<?> holder) {
-        if (holder != null) {
-            var key = holder.unwrapKey().get();
-            if (key != null) {
-                return key.location().toString();
-            }
-        }
-        return "";
+        if (holder == null) return "";
+
+        var key = holder.getKey();
+        if (key == null) return "";
+
+        return key.location().toString();
     }
 
     public static Set<String> getHolderTags(Holder<?> holder) {
-        if (holder != null) {
-            return holder.tags().map(TagKey::location).map(ResourceLocation::toString).collect(Collectors.toSet());
-        }
-        return Set.of();
+        if (holder == null) return Set.of();
+
+        return holder.tags().map(TagKey::location).map(ResourceLocation::toString).collect(Collectors.toSet());
     }
 
     public static String getSourceType(DamageSource source) {
-        if (source != null) {
-            return getHolderType(source.typeHolder());
-        }
-        return "";
+        if (source == null) return "";
+
+        return getHolderType(source.typeHolder());
     }
 
     public static Set<String> getSourceTags(DamageSource source) {
-        if (source != null) {
-            return getHolderTags(source.typeHolder());
-        }
-        return Set.of();
+        if (source == null) return Set.of();
+
+        return getHolderTags(source.typeHolder());
     }
 
     public static Object execute(String expression, LivingEntity entity, DamageSource source) {
