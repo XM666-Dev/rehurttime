@@ -1,7 +1,11 @@
 package com.xm666.rehurttime;
 
+import net.neoforged.fml.ModContainer;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.config.ModConfig;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
+@Mod(ReHurtTime.MODID)
 public class Config {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
@@ -32,5 +36,9 @@ public class Config {
     public static final ModConfigSpec.ConfigValue<String> LOG_FUNCTION = BUILDER
             .define("logFunction", "seq.map('entityType', getEntityType(entity), 'sourceEntityType', getEntityType(getEntity(source)), 'sourceType', getSourceType(source))");
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+    private static final ModConfigSpec SPEC = BUILDER.build();
+
+    public Config(ModContainer container) {
+        container.registerConfig(ModConfig.Type.COMMON, SPEC);
+    }
 }

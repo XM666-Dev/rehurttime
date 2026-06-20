@@ -11,5 +11,5 @@ public class MixinConfig {
     public static final ModConfigSpec.BooleanValue APPLIES_KNOCKBACK_ENABLED = BUILDER
             .define("appliesKnockbackEnabled", true);
 
-    static final ModConfigSpec SPEC = BUILDER.build();
+    public static final ModConfigSpec SPEC = BUILDER.build();
 }
