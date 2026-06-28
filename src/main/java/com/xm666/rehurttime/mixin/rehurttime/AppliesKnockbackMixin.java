@@ -1,4 +1,4 @@
-package com.xm666.rehurttime.mixin;
+package com.xm666.rehurttime.mixin.rehurttime;
 
 import com.xm666.rehurttime.Config;
 import com.xm666.rehurttime.handler.ExpressionHandler;
