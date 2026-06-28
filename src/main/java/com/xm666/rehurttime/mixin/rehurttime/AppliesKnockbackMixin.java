@@ -1,4 +1,4 @@
-package com.xm666.rehurttime.mixin;
+package com.xm666.rehurttime.mixin.rehurttime;
 
 import com.llamalad7.mixinextras.sugar.Local;
 import com.xm666.rehurttime.Config;
