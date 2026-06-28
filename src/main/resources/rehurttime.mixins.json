@@ -4,8 +4,8 @@
   "plugin": "com.xm666.rehurttime.MixinConfigPlugin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "AppliesKnockbackMixin$LivingEntityMixin",
-    "BypassesInvulnerabilityMixin$LivingEntityMixin"
+    "rehurttime.AppliesKnockbackMixin$LivingEntityMixin",
+    "rehurttime.BypassesInvulnerabilityMixin$LivingEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
