@@ -28,9 +28,6 @@ sourceSets.main.resources {
 
 repositories {
     // Add here additional repositories if required by some of the dependencies below.
-    maven {
-        url "https://cursemaven.com"
-    }
 }
 
 base {
@@ -154,8 +151,6 @@ dependencies {
 
     // This adds the library to all the runs
     additionalRuntimeClasspath 'com.googlecode.aviator:aviator:5.4.3'
-
-    implementation "curse.maven:customnpcs-unofficial-1052708:7411561"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
