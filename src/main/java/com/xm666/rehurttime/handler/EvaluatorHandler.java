@@ -22,7 +22,7 @@ public class EvaluatorHandler {
             var methodName = entry.getKey();
             var methods = entry.getValue();
             methods.add(null);
-            instance.addFunction(new ClassMethodFunction((Class<?>) ExpressionHandler.class, true, methodName, methodName, methods));
+            instance.addFunction(new ClassMethodFunction(ExpressionHandler.class, true, methodName, methodName, methods));
             methods.remove(methods.size() - 1);
         }
     }
