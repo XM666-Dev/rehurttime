@@ -140,9 +140,10 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
+    additionalRuntimeClasspath 'com.googlecode.aviator:aviator:5.4.4'
     jarJar(implementation(group: 'com.googlecode.aviator', name: 'aviator')) {
         version {
-            prefer '5.4.3'
+            prefer '5.4.4'
         }
     }
 }
