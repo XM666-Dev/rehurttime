@@ -2,12 +2,11 @@ package com.xm666.rehurttime.handler;
 
 import com.xm666.rehurttime.Config;
 import com.xm666.rehurttime.ReHurtTime;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.event.config.ModConfigEvent;
-import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.entity.living.LivingAttackEvent;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.event.config.ModConfigEvent;
 
 public class LogHandler {
     public static class LogHandlerCommon {
@@ -18,9 +17,8 @@ public class LogHandler {
         }
     }
 
-    @Mod(value = ReHurtTime.MODID)
     public static class LogHandlerConfig {
-        public LogHandlerConfig(IEventBus modEventBus) {
+        public static void init(IEventBus modEventBus) {
             modEventBus.register(LogHandlerConfig.class);
         }
 
@@ -36,9 +34,9 @@ public class LogHandler {
 
         private static void toggle() {
             if (Config.LOG_ENABLED.get()) {
-                NeoForge.EVENT_BUS.register(LogHandlerCommon.class);
+                MinecraftForge.EVENT_BUS.register(LogHandlerCommon.class);
             } else {
-                NeoForge.EVENT_BUS.unregister(LogHandlerCommon.class);
+                MinecraftForge.EVENT_BUS.unregister(LogHandlerCommon.class);
             }
         }
     }

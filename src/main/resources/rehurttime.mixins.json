@@ -2,7 +2,7 @@
   "required": true,
   "package": "com.xm666.rehurttime.mixin",
   "plugin": "com.xm666.rehurttime.MixinConfigPlugin",
-  "compatibilityLevel": "JAVA_21",
+  "compatibilityLevel": "JAVA_17",
   "mixins": [
     "rehurttime.AppliesKnockbackMixin$LivingEntityMixin",
     "rehurttime.BypassesInvulnerabilityMixin$LivingEntityMixin"

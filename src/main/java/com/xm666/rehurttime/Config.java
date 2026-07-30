@@ -1,15 +1,20 @@
 package com.xm666.rehurttime;
 
-import net.neoforged.fml.ModContainer;
-import net.neoforged.fml.common.Mod;
-import net.neoforged.fml.config.ModConfig;
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.ModContainer;
+import net.minecraftforge.fml.config.ConfigTracker;
+import net.minecraftforge.fml.config.IConfigSpec;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.loading.FMLPaths;
 
-@Mod(ReHurtTime.MODID)
+import java.lang.reflect.InvocationTargetException;
+import java.nio.file.Path;
+import java.util.Locale;
+
 public class Config {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    public static final ModConfigSpec.ConfigValue<String> BYPASSES_INVULNERABILITY_PREDICATE = BUILDER
+    public static final ForgeConfigSpec.ConfigValue<String> BYPASSES_INVULNERABILITY_PREDICATE = BUILDER
             .comment("""
                     Available variables:
                     LivingEntity entity
@@ -27,18 +32,34 @@ public class Config {
                     ItemStack getWeaponItem(DamageSource source)""")
             .define("bypassesInvulnerabilityPredicate", "getEntityType(entity) != 'minecraft:player' && !include(getSourceTags(source), 'neoforge:is_environment') && getSourceType(source) != 'minecraft:campfire'");
 
-    public static final ModConfigSpec.ConfigValue<String> APPLIES_KNOCKBACK_PREDICATE = BUILDER
+    public static final ForgeConfigSpec.ConfigValue<String> APPLIES_KNOCKBACK_PREDICATE = BUILDER
             .define("appliesKnockbackPredicate", "include(getSourceTags(getLastDamageSource(entity)), 'minecraft:no_knockback')");
 
-    public static final ModConfigSpec.BooleanValue LOG_ENABLED = BUILDER
+    public static final ForgeConfigSpec.BooleanValue LOG_ENABLED = BUILDER
             .define("logEnabled", false);
 
-    public static final ModConfigSpec.ConfigValue<String> LOG_FUNCTION = BUILDER
+    public static final ForgeConfigSpec.ConfigValue<String> LOG_FUNCTION = BUILDER
             .define("logFunction", "seq.map('entityType', getEntityType(entity), 'sourceEntityType', getEntityType(getEntity(source)), 'sourceType', getSourceType(source))");
 
-    private static final ModConfigSpec SPEC = BUILDER.build();
+    private static final ForgeConfigSpec SPEC = BUILDER.build();
 
-    public Config(ModContainer container) {
-        container.registerConfig(ModConfig.Type.COMMON, SPEC);
+    public static void init(ModContainer container) {
+        registerConfig(ModConfig.Type.COMMON, SPEC, container);
+    }
+
+    public static void registerConfig(ModConfig.Type type, IConfigSpec<?> spec, ModContainer container) {
+        registerConfig(type, spec, container, type.extension());
+    }
+
+    public static void registerConfig(ModConfig.Type type, IConfigSpec<?> spec, ModContainer container, String extension) {
+        var fileName = String.format(Locale.ROOT, "%s-%s.toml", ReHurtTime.MODID, extension);
+        var config = new ModConfig(type, spec, container, fileName);
+        try {
+            var method = ConfigTracker.class.getDeclaredMethod("openConfig", ModConfig.class, Path.class);
+            method.setAccessible(true);
+            method.invoke(ConfigTracker.INSTANCE, config, FMLPaths.CONFIGDIR.get());
+        } catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

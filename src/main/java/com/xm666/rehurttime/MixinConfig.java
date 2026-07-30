@@ -1,15 +1,15 @@
 package com.xm666.rehurttime;
 
-import net.neoforged.neoforge.common.ModConfigSpec;
+import net.minecraftforge.common.ForgeConfigSpec;
 
 public class MixinConfig {
-    private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
+    private static final ForgeConfigSpec.Builder BUILDER = new ForgeConfigSpec.Builder();
 
-    public static final ModConfigSpec.BooleanValue BYPASSES_INVULNERABILITY_ENABLED = BUILDER
+    public static final ForgeConfigSpec.BooleanValue BYPASSES_INVULNERABILITY_ENABLED = BUILDER
             .define("bypassesInvulnerabilityEnabled", true);
 
-    public static final ModConfigSpec.BooleanValue APPLIES_KNOCKBACK_ENABLED = BUILDER
+    public static final ForgeConfigSpec.BooleanValue APPLIES_KNOCKBACK_ENABLED = BUILDER
             .define("appliesKnockbackEnabled", true);
 
-    public static final ModConfigSpec SPEC = BUILDER.build();
+    public static final ForgeConfigSpec SPEC = BUILDER.build();
 }
