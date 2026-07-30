@@ -146,7 +146,7 @@ dependencies {
     additionalRuntimeClasspath 'com.googlecode.aviator:aviator:5.4.3'
     jarJar(implementation(group: 'com.googlecode.aviator', name: 'aviator')) {
         version {
-            prefer '5.4.3'
+            prefer '5.4.4'
         }
     }
     implementation "curse.maven:customnpcs-unofficial-1052708:7411561"
