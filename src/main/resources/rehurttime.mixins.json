@@ -5,6 +5,7 @@
   "plugin": "com.xm666.rehurttime.MixinConfigPlugin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "customnpcs.BypassesInvulnerabilityMixin$EntityNPCInterfaceMixin",
     "rehurttime.AppliesKnockbackMixin$LivingEntityMixin",
     "rehurttime.BypassesInvulnerabilityMixin$LivingEntityMixin"
   ],

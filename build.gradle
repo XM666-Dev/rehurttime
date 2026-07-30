@@ -115,6 +115,9 @@ sourceSets.main.resources { srcDir 'src/generated/resources' }
 repositories {
     // Put repositories for dependencies here
     // ForgeGradle automatically adds the Forge maven and Maven Central for you
+    maven {
+        url "https://cursemaven.com"
+    }
 
     // If you have mod jar dependencies in ./libs, you can declare them as a repository like so.
     // See https://docs.gradle.org/current/userguide/declaring_repositories.html#sub:flat_dir_resolver
@@ -155,6 +158,7 @@ dependencies {
     jarJar(group: 'com.googlecode.aviator', name: 'aviator') {
         jarJar.pin(it, '5.4.3')
     }
+    implementation fg.deobf("curse.maven:customnpcs-unofficial-1052708:8414335")
 }
 
 mixin {
