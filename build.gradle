@@ -158,7 +158,6 @@ dependencies {
 }
 
 mixin {
-    // MixinGradle Settings
     add sourceSets.main, 'rehurttime.mixins.refmap.json'
     config 'rehurttime.mixins.json'
 }
