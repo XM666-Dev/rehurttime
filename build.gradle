@@ -140,11 +140,8 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 
-    // Compiles against and includes the supported version of examplelib
-    //   from 2.0 (inclusive)
     jarJar(implementation(group: 'com.googlecode.aviator', name: 'aviator')) {
         version {
-            // Version used in your workspace and bundled in mod jar
             prefer '5.4.3'
         }
     }
