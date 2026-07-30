@@ -155,8 +155,8 @@ dependencies {
         jarJar.ranged(it, "[0.5.4,)")
     }
     minecraftLibrary 'com.googlecode.aviator:aviator:5.4.3'
-    jarJar(group: 'com.googlecode.aviator', name: 'aviator') {
-        jarJar.pin(it, '5.4.3')
+    jarJar(group: 'com.googlecode.aviator', name: 'aviator', version: '[5.4.0,5.5.0)') {
+        jarJar.pin(it, '5.4.4')
     }
     implementation fg.deobf("curse.maven:customnpcs-unofficial-1052708:8414335")
 }
