@@ -64,6 +64,33 @@ public class ExpressionHandler {
         return getHolderTags(source.typeHolder());
     }
 
+    public static DamageSource getLastDamageSource(Entity entity) {
+        if (!(entity instanceof LivingEntity living)) return null;
+
+        return living.getLastDamageSource();
+    }
+
+    public static Entity getEntity(DamageSource source) {
+        if (source == null) return null;
+
+        return source.getEntity();
+    }
+
+    public static Entity getDirectEntity(DamageSource source) {
+        if (source == null) return null;
+
+        return source.getDirectEntity();
+    }
+
+    public static ItemStack getWeaponItem(DamageSource source) {
+        if (source == null) return null;
+
+        var directEntity = source.getDirectEntity();
+        if (!(directEntity instanceof LivingEntity living)) return null;
+
+        return living.getMainHandItem();
+    }
+
     public static Object execute(String expression, LivingEntity entity, DamageSource source) {
         return EvaluatorHandler.execute(expression, "entity", entity, "source", source);
     }
