@@ -30,10 +30,10 @@ public class Config {
                     Entity getEntity(DamageSource source)
                     Entity getDirectEntity(DamageSource source)
                     ItemStack getWeaponItem(DamageSource source)""")
-            .define("bypassesInvulnerabilityPredicate", "getEntityType(entity) != 'minecraft:player' && !include(getSourceTags(source), 'neoforge:is_environment') && getSourceType(source) != 'minecraft:campfire'");
+            .define("bypassesInvulnerabilityPredicate", "if (getEntityType(entity) != 'minecraft:player') {let type = getSourceType(source); type != 'minecraft:in_fire' && type != 'minecraft:on_fire' && type != 'minecraft:lava' && type != 'minecraft:hot_floor' && type != 'minecraft:drown' && type != 'minecraft:starve' && type != 'minecraft:dry_out' && type != 'minecraft:freeze' && type != 'minecraft:lightning_bolt' && type != 'minecraft:cactus' && type != 'minecraft:stalagmite' && type != 'minecraft:falling_stalactite' && type != 'minecraft:falling_block' && type != 'minecraft:falling_anvil' && type != 'minecraft:cramming' && type != 'minecraft:fly_into_wall' && type != 'minecraft:sweet_berry_bush' && type != 'minecraft:in_wall'}");
 
     public static final ForgeConfigSpec.ConfigValue<String> APPLIES_KNOCKBACK_PREDICATE = BUILDER
-            .define("appliesKnockbackPredicate", "include(getSourceTags(getLastDamageSource(entity)), 'minecraft:no_knockback')");
+            .define("appliesKnockbackPredicate", "let lastSource = getLastDamageSource(entity); include(getSourceTags(lastSource), 'minecraft:is_explosion') || getEntity(lastSource) == nil");
 
     public static final ForgeConfigSpec.BooleanValue LOG_ENABLED = BUILDER
             .define("logEnabled", false);
