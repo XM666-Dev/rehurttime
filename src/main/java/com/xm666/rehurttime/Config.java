@@ -25,7 +25,7 @@ public class Config {
                     Entity getEntity(DamageSource source)
                     Entity getDirectEntity(DamageSource source)
                     ItemStack getWeaponItem(DamageSource source)""")
-            .define("bypassesInvulnerabilityPredicate", "getEntityType(entity) != 'minecraft:player' && !include(getSourceTags(source), 'neoforge:is_environment') && getSourceType(source) != 'minecraft:campfire'");
+            .define("bypassesInvulnerabilityPredicate", "getEntityType(entity) != 'minecraft:player' && !include(getSourceTags(source), 'neoforge:is_environment')");
 
     public static final ModConfigSpec.ConfigValue<String> APPLIES_KNOCKBACK_PREDICATE = BUILDER
             .define("appliesKnockbackPredicate", "include(getSourceTags(getLastDamageSource(entity)), 'minecraft:no_knockback')");
