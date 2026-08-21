@@ -30,10 +30,10 @@ public class Config {
                     Entity getEntity(DamageSource source)
                     Entity getDirectEntity(DamageSource source)
                     ItemStack getWeaponItem(DamageSource source)""")
-            .define("bypassesInvulnerabilityPredicate", "if (getEntityType(entity) != 'minecraft:player') {let type = getSourceType(source); type != 'minecraft:in_fire' && type != 'minecraft:on_fire' && type != 'minecraft:lava' && type != 'minecraft:hot_floor' && type != 'minecraft:drown' && type != 'minecraft:starve' && type != 'minecraft:dry_out' && type != 'minecraft:freeze' && type != 'minecraft:lightning_bolt' && type != 'minecraft:cactus' && type != 'minecraft:stalagmite' && type != 'minecraft:falling_stalactite' && type != 'minecraft:falling_block' && type != 'minecraft:falling_anvil' && type != 'minecraft:cramming' && type != 'minecraft:fly_into_wall' && type != 'minecraft:sweet_berry_bush' && type != 'minecraft:in_wall'}");
+            .define("bypassesInvulnerabilityPredicate", "getEntityType(entity) != 'minecraft:player' && !include(seq.set('minecraft:in_fire', 'minecraft:on_fire', 'minecraft:lava', 'minecraft:hot_floor', 'minecraft:drown', 'minecraft:starve', 'minecraft:dry_out', 'minecraft:freeze', 'minecraft:lightning_bolt', 'minecraft:cactus', 'minecraft:stalagmite', 'minecraft:falling_stalactite', 'minecraft:falling_block', 'minecraft:falling_anvil', 'minecraft:cramming', 'minecraft:fly_into_wall', 'minecraft:sweet_berry_bush', 'minecraft:in_wall'), getSourceType(source))");
 
     public static final ForgeConfigSpec.ConfigValue<String> APPLIES_KNOCKBACK_PREDICATE = BUILDER
-            .define("appliesKnockbackPredicate", "let lastSource = getLastDamageSource(entity); include(getSourceTags(lastSource), 'minecraft:is_explosion') || getEntity(lastSource) == nil");
+            .define("appliesKnockbackPredicate", "lastSource = getLastDamageSource(entity); include(getSourceTags(lastSource), 'minecraft:is_explosion') || getEntity(lastSource) == nil");
 
     public static final ForgeConfigSpec.BooleanValue LOG_ENABLED = BUILDER
             .define("logEnabled", false);
