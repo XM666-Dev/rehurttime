@@ -149,7 +149,7 @@ dependencies {
             prefer '5.4.4'
         }
     }
-    implementation "curse.maven:customnpcs-unofficial-1052708:7411561"
+    compileOnly "curse.maven:customnpcs-unofficial-1052708:7411561"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.
